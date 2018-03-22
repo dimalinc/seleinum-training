@@ -1,0 +1,15 @@
+<application>
+  <component name="ToolbarClicksCollector">
+    <counts>
+      <entry action="CompileDirty@NavBarToolbar" count="9" />
+      <entry action="DatabaseView.AddActionGroupPopup@ProjectViewToolbar" count="1" />
+      <entry action="DatabaseView.PropertiesAction@ProjectViewToolbar" count="1" />
+      <entry action="Javaee.RefreshDeploymentStatus@unknown" count="2" />
+      <entry action="Run@NavBarToolbar" count="92" />
+      <entry action="Stop@NavBarToolbar" count="15" />
+      <entry action="Vcs.UpdateProject@NavBarToolbar" count="2" />
+      <entry action="com.intellij.ui.AnActionButton$AnActionButtonWrapper@ToolbarDecorator" count="1" />
+      <entry action="com.intellij.ui.CommonActionsPanel$MyActionButton@ToolbarDecorator" count="12" />
+    </counts>
+  </component>
+</application>
