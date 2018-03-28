@@ -1,17 +1,17 @@
 <application>
   <component name="ToolbarClicksCollector">
     <counts>
-      <entry action="CheckinProject@NavBarToolbar" count="1" />
+      <entry action="CheckinProject@NavBarToolbar" count="2" />
       <entry action="CompileDirty@NavBarToolbar" count="9" />
       <entry action="DatabaseView.AddActionGroupPopup@ProjectViewToolbar" count="1" />
       <entry action="DatabaseView.PropertiesAction@ProjectViewToolbar" count="1" />
       <entry action="Debug@NavBarToolbar" count="1" />
       <entry action="Javaee.RefreshDeploymentStatus@unknown" count="2" />
-      <entry action="Run@NavBarToolbar" count="128" />
-      <entry action="Stop@NavBarToolbar" count="41" />
+      <entry action="Run@NavBarToolbar" count="145" />
+      <entry action="Stop@NavBarToolbar" count="45" />
       <entry action="Vcs.UpdateProject@NavBarToolbar" count="2" />
       <entry action="com.intellij.ui.AnActionButton$AnActionButtonWrapper@ToolbarDecorator" count="7" />
-      <entry action="com.intellij.ui.CommonActionsPanel$MyActionButton@ToolbarDecorator" count="13" />
+      <entry action="com.intellij.ui.CommonActionsPanel$MyActionButton@ToolbarDecorator" count="14" />
     </counts>
   </component>
 </application>

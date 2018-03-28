@@ -24,7 +24,7 @@ import static java.util.concurrent.TimeUnit.SECONDS;
 
 public class MyFirstTest {
 
-    final static String linksCsvFilePath = "D:\\Java\\Cart.Bil_parse_files\\linksList.csv";
+    final static String linksCsvFilePath = "D:\\Java\\Cart.Bil_parse_files\\linksListALL_YEARS_RAM.csv";
     final static String carMakeModelSubmodelCsvFilePath = "";
     Csv.Writer csvWriter = new Csv.Writer(linksCsvFilePath).delimiter(';');
 
@@ -48,10 +48,10 @@ public class MyFirstTest {
         //  options.addArguments("start-fullscreen");
         driver = new FirefoxDriver();
 
-        driver.manage().timeouts().pageLoadTimeout(10, SECONDS);
-        driver.manage().timeouts().setScriptTimeout(10, SECONDS);
+        driver.manage().timeouts().pageLoadTimeout(30, SECONDS);
+        driver.manage().timeouts().setScriptTimeout(15, SECONDS);
 
-        driver.manage().timeouts().implicitlyWait(5, SECONDS);
+        driver.manage().timeouts().implicitlyWait(7, SECONDS);
 
         DesiredCapabilities caps = new DesiredCapabilities();
         caps.setCapability("unexpectedAlertBehavior", "dismiss");
@@ -73,14 +73,18 @@ public class MyFirstTest {
         bad_sleep(2500);
 
 
-        for (int i = 0; i < 1; i++) {
-            driver.findElement(By.id("engineSelector-year")).sendKeys(Keys.DOWN, Keys.DOWN);
-        }
+        String[] stringArrayListYEAR = driver.findElement(By.id("engineSelector-year")).getText().split("\n");
+        int listLengthYEAR = stringArrayListYEAR.length - 1;
+        driver.findElement(By.id("engineSelector-year")).sendKeys(/*"3",*/ Keys.DOWN);
+
+        for (int y = 0; y < listLengthYEAR; y++) {
+            driver.findElement(By.id("engineSelector-year")).sendKeys(Keys.DOWN/*, Keys.DOWN*/);
+
         System.out.println(" - - - - - " + driver.findElement(By.id("engineSelector-year")).getTagName() + " - - - - - ");
 
         bad_sleep(1500);
 
-        driver.findElement(By.id("engineSelector-make")).sendKeys("R"/*, Keys.DOWN, Keys.DOWN, Keys.DOWN*/);
+        driver.findElement(By.id("engineSelector-make")).sendKeys("R"/*, Keys.DOWN*/);
         //   System.out.println(" - - - - - " + driver.findElement(By.id("engineSelector-make")).getTagName() + " - - - - - ");
 
         bad_sleep(2500);
@@ -89,37 +93,36 @@ public class MyFirstTest {
         WebElement dynamicElement = (new WebDriverWait(driver, 10))
                 .until(ExpectedConditions.presenceOfElementLocated(By.id("engineSelector-model")));*/
 
-        bad_sleep(1500);
+        bad_sleep(2500);
 
         System.out.println("- - -MODEL -");
+        String[] stringArrayListMODEL = driver.findElement(By.id("engineSelector-model")).getText().split("\n");
+        int listLengthMODEL = stringArrayListMODEL.length - 1;
         driver.findElement(By.id("engineSelector-model")).sendKeys(/*"3",*/ Keys.DOWN);
-        //  System.out.println(" - - - - - " + driver.findElement(By.id("engineSelector-model")).getTagName() + " - - - - - ");
-        bad_sleep(1500);
+        for (int k = 0; k < listLengthMODEL; k++) {
+            bad_sleep(2500);
 
-       /* //ждем пока прогрузится submodel
-        dynamicElement = (new WebDriverWait(driver, 10))
-                .until(ExpectedConditions.presenceOfElementLocated(By.id("engineSelector-submodel")));
-*/
 
-        bad_sleep(1500);
+            System.out.println("- -SUBMODEL- -");
+            // определяем длину списка - -SUBMODEL- -
+            String[] stringArrayListSUBMODEL = driver.findElement(By.id("engineSelector-submodel")).getText().split("\n");
+            int listLengthSUBMODEL = stringArrayListSUBMODEL.length - 1;
+            //  System.out.println("Длина списка " + By.id("inlineDrop-0") + " = " + listLengthSUBMODEL);
+            // TODO: убрать следующую строку после отладки выбора не всех inlineDrop-2
+            // driver.findElement(By.id("engineSelector-submodel")).sendKeys("R"/*Keys.DOWN*/);
 
-        System.out.println("- -SUBMODEL- -");
-        // определяем длину списка - -SUBMODEL- -
-        String[] stringArrayListSUBMODEL = driver.findElement(By.id("engineSelector-submodel")).getText().split("\n");
-        int listLengthSUBMODEL = stringArrayListSUBMODEL.length - 1;
-        //  System.out.println("Длина списка " + By.id("inlineDrop-0") + " = " + listLengthSUBMODEL);
-
-        // TODO: убрать следующую строку после отладки выбора не всех inlineDrop-2
-        // driver.findElement(By.id("engineSelector-submodel")).sendKeys("R"/*Keys.DOWN*/);
-
-        for (int i = 0; i < /*listLengthSUBMODEL*/1; i++) {
+            // TODO: поставить первый проход по SUBMODEL обратно в цикл
             driver.findElement(By.id("engineSelector-submodel")).sendKeys(Keys.DOWN);
-            bad_sleep(1500);
-            dropdown_inlineDrop_0_go(driver/*,By.id("inlineDrop-0")*/);
-            driver.findElement(By.id("engineSelector-submodel")).sendKeys(Keys.DOWN);
+            for (int i = 0; i < listLengthSUBMODEL; i++) {
+                bad_sleep(1500);
+                dropdown_inlineDrop_0_go(driver/*,By.id("inlineDrop-0")*/);
+                driver.findElement(By.id("engineSelector-submodel")).sendKeys(Keys.DOWN);
+            }
+
+            driver.findElement(By.id("engineSelector-model")).sendKeys(Keys.DOWN);
         }
 
-
+        }
     }
 
     public void dropdown_inlineDrop_0_go(WebDriver driver/*, By locator*/) {
@@ -136,8 +139,8 @@ public class MyFirstTest {
 
                 driver.findElement(By.id("inlineDrop-0")).sendKeys(Keys.DOWN);
 
-                // определяем длину списка 1
-                //    bad_sleep(1500);
+              //   определяем длину списка 1
+                    bad_sleep(1500);
 
                 if (isElementPresent(driver, By.id("inlineDrop-1"))) {
                     String[] stringArrayList1 = driver.findElement(By.id("inlineDrop-1")).getText().split("\n");
@@ -196,6 +199,7 @@ public class MyFirstTest {
 
             System.out.println(currentUrl);
             linksList.add(currentUrl);
+
             writePageToCsv();
 
             // partNumbersParseFromUrl(currentUrl);
@@ -230,20 +234,48 @@ public class MyFirstTest {
 
     public void writePageToCsv() {
 
+        // пишем заголовок машины
+
+        csvWriter.value(driver.getCurrentUrl());
+        csvWriter.value("");
+
 
         csvWriter.value(driver.findElement(
                 By.xpath("//div[@id='dnn_ctr459_ModuleContent']/div[@id='ProductResults']/h1[@class='searchFeedback']"))
                 .getText());
 
-        csvWriter.value(driver.getCurrentUrl());
+        csvWriter.newLine().flush();
+
+        //начинаем писать данные спарсеных шоков
+
 
         List<WebElement> descBoxElements = driver.findElements(By.className("descBox"));
 
         for (WebElement webElement : descBoxElements) {
-            csvWriter.value(webElement.getText());
-        }
+
+            csvWriter.value("");
+
+            for (String s:descBoxElementsParse(webElement.getText()) ) {
+                csvWriter.value(s);
+            }
 
         csvWriter.newLine().flush();
+        }
+
+
+
+    }
+
+    public ArrayList<String> descBoxElementsParse(String input){
+        ArrayList<String> result = new ArrayList<>();
+
+
+        String[] split = input.split(": ");
+        for (String s:split) {
+            String[] ss = s.split("\n");
+            result.add( ss[0]);
+        }
+        return result;
     }
 
     public void writeToTXT() {
